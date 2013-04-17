@@ -1,8 +1,10 @@
-angular.module("simple").run(["$templateCache", function($templateCache) {
+(function() {
+  return ["$templateCache", function($templateCache) {
 
-  $templateCache.put("simple.html",
-    "Howdy there! \\ Your name is \"{{ name }}\"." +
-    ""
-  );
+    $templateCache.put("simple.html",
+      "Howdy there! \\ Your name is \"{{ name }}\"." +
+      ""
+    );
 
-}]);
+  }];
+})();

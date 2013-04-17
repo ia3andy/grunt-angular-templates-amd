@@ -1,6 +1,6 @@
-# grunt-angular-templates [![Build Status](https://travis-ci.org/ericclemmons/grunt-angular-templates.png?branch=master)](https://travis-ci.org/ericclemmons/grunt-angular-templates)
+# grunt-angular-templates-amd 
 
-Grunt build task to concatenate & register your AngularJS templates in the $templateCache
+Grunt build task to concatenate & register your AngularJS templates in the $templateCache wrapped for amd usage
 
 **NOTE**:
 
@@ -32,8 +32,9 @@ which preloads `$templateCache` to prevent round-trips to the server.
 // grunt.js
 grunt.initConfig({
   ngtemplates:    {
-    myapp:        {
+    build:        {
       options:    {
+        name:     'MyApp'
         base:     'src/views',        // $templateCache ID will be relative to this folder
         prepend:  '/static/assets/'   // (Optional) Prepend path to $templateCache ID
       },
@@ -44,15 +45,17 @@ grunt.initConfig({
 });
 ```
 
-**You should name your sub-target (e.g. `myapp`) after the name of the module the templates will be added to**.
+**You should name choose the name (e.g. `myapp`) after the name of the module the templates will be added to**.
 
 
 This will generate the following at `dist/templates.js`:
 
 ```js
-angular.module('myapp').run(['$templateCache', function($templateCache) {
-  ...
-}]);
+(function() {
+  return ['$templateCache', function($templateCache) {
+    ...
+  }]);
+};)
 ```
 
 ### Include Compiled Templates
