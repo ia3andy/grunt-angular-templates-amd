@@ -34,7 +34,6 @@ grunt.initConfig({
   ngtemplates:    {
     build:        {
       options:    {
-        name:     'MyApp'
         base:     'src/views',        // $templateCache ID will be relative to this folder
         prepend:  '/static/assets/'   // (Optional) Prepend path to $templateCache ID
       },
@@ -45,9 +44,6 @@ grunt.initConfig({
 });
 ```
 
-**You should name choose the name (e.g. `myapp`) after the name of the module the templates will be added to**.
-
-
 This will generate the following at `dist/templates.js`:
 
 ```js
@@ -55,7 +51,7 @@ This will generate the following at `dist/templates.js`:
   return ['$templateCache', function($templateCache) {
     ...
   }]);
-};)
+})();
 ```
 
 ### Include Compiled Templates
@@ -70,9 +66,9 @@ or via your Gruntfile:
 
 ```js
 concat: {
-  myapp: {
+  build: {
     src: [
-      'src/js/**/*.js',       // MyApp module first
+      'src/js/**/*.js',       
       '<%= ngtemplates.myapp.dest %>' // Generated templates
     ],
     dest: 'dist/js/app.js'
@@ -83,52 +79,11 @@ concat: {
 
 ## Changelog
 
-### v0.3.1
 
-- Add `prepend` option for modifying final `$templateCache` IDs, thanks to @mbarchein. ([#16](https://github.com/ericclemmons/grunt-angular-templates/pull/16))
-
-### v0.3.0
-
-- **BC break** - Templates are added to an existing module (e.g. `myapp`) rather than being their own `myapp.templates` module to be manually included, thanks to @geddesign. ([#10](https://github.com/ericclemmons/grunt-angular-templates/issues/10))
-
-### v0.2.2
-
-- Fixes
-
-  - Escape backslashes, thanks to @dallonf. ([#9](https://github.com/ericclemmons/grunt-angular-templates/pull/9))
-
-### v0.2.1
-
-  - Remove `./bin/grunt-angular-templates`.  No need for it!
-
-### v0.2.0
-
-  - Update to Grunt 0.4, thanks to @jgrund. ([#5](https://github.com/ericclemmons/grunt-angular-templates/issues/5))
-
-### v0.1.3
-
-- Fixes
-
-    - Convert `\\` to `/` in template IDs (for on win32 systems) ([#3](https://github.com/ericclemmons/grunt-angular-templates/issues/3))
-
-### v0.1.2
-
-- Added NPM keywords
-
-### v0.1.1
-
-- Fixes
-
-    - [Fails to combine multiple templates](https://github.com/ericclemmons/grunt-angular-templates/issues/1)
-
-- New
-
-    - Added directions to README on how to integrate with AngularJS app
-    - Integrated with TravisCI
 
 ### v0.1.0
 
-- Released to [NPM](https://npmjs.org/package/grunt-angular-templates)
+- Released to [NPM](https://npmjs.org/package/grunt-angular-templates-amd)
 
 ## Contributing
 In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using [grunt][grunt].
@@ -136,5 +91,5 @@ In lieu of a formal styleguide, take care to maintain the existing coding style.
 
 ## License
 
-Copyright (c) 2013 Eric Clemmons
+Copyright (c) 2013 Andy Damevin
 Licensed under the MIT license.
