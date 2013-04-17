@@ -1,5 +1,5 @@
 (function() {
-  return ["$templateCache", function($templateCache) {
+  var templatesCacheLoader = ["$templateCache", function($templateCache) {
 
     $templateCache.put("multiple/one.html",
       "<h1>One</h1>" +
@@ -22,4 +22,19 @@
     );
 
   }];
+
+  // CommonJS module is defined
+  if (hasModule) {
+      module.exports = templatesCacheLoader;
+  }
+  /*global ender:false */
+  if (typeof ender === 'undefined') {
+      this['templatesCacheLoader'] = templatesCacheLoader;
+  }
+  /*global define:false */
+  if (typeof define === "function" && define.amd) {
+      define("templatesCacheLoader", [], function () {
+          return templatesCacheLoader;
+      });
+  }
 })();

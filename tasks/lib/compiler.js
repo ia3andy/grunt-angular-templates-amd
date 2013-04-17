@@ -24,7 +24,7 @@ module.exports.init = function(grunt) {
   };
 
   var compile = function(id, options, files, callback) {
-    var template = '(function() {\n  return ["$templateCache", function($templateCache) {\n<%= content %>\n  }];\n})();';
+    var template = '(function() {\n  var templatesCacheLoader = ["$templateCache", function($templateCache) {\n<%= content %>\n  }];\n\n  // CommonJS module is defined\n  if (hasModule) {\n      module.exports = templatesCacheLoader;\n  }\n  /*global ender:false */\n  if (typeof ender === \'undefined\') {\n      this[\'templatesCacheLoader\'] = templatesCacheLoader;\n  }\n  /*global define:false */\n  if (typeof define === \"function\" && define.amd) {\n      define(\"templatesCacheLoader\", [], function () {\n          return templatesCacheLoader;\n      });\n  }\n})();';
 
     concat(options, files, function(err, concated) {
       var compiled = process(template, id, concated.join(''));
