@@ -39,6 +39,7 @@ module.exports = function(grunt) {
     ngtemplates: {
       multiple: {
         options: {
+          module: 'templates',
           base: 'test/fixtures'
         },
         src: ['test/fixtures/multiple/**/*.html'],
@@ -46,6 +47,7 @@ module.exports = function(grunt) {
       },
       simple: {
         options: {
+          module: 'templates',
           base: 'test/fixtures'
         },
         src: ['test/fixtures/simple.html'],
@@ -53,6 +55,7 @@ module.exports = function(grunt) {
       },
       prepend: {
         options: {
+          module: 'templates',
           base: 'test/fixtures',
           prepend: '/prepend/'
         },

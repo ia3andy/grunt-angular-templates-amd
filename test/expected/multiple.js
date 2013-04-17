@@ -29,11 +29,11 @@
   }
   /*global ender:false */
   if (typeof ender === 'undefined') {
-      this['templatesCacheLoader'] = templatesCacheLoader;
+      this['templates'] = templatesCacheLoader;
   }
   /*global define:false */
   if (typeof define === "function" && define.amd) {
-      define("templatesCacheLoader", [], function () {
+      define("templates", [], function () {
           return templatesCacheLoader;
       });
   }
