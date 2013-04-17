@@ -9,7 +9,7 @@
   }];
 
   // CommonJS module is defined
-  if (hasModule) {
+  if (typeof module !== "undefined" && module.exports) {
       module.exports = templatesCacheLoader;
   }
   /*global ender:false */
