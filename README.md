@@ -34,6 +34,7 @@ grunt.initConfig({
   ngtemplates:    {
     build:        {
       options:    {
+        module:   'template',         // AMD module name (should be the filename)
         base:     'src/views',        // $templateCache ID will be relative to this folder
         prepend:  '/static/assets/'   // (Optional) Prepend path to $templateCache ID
       },
@@ -48,9 +49,26 @@ This will generate the following at `dist/templates.js`:
 
 ```js
 (function() {
-  return ['$templateCache', function($templateCache) {
+  var templatesCacheLoader = ["$templateCache", function($templateCache) {
+
     ...
-  }]);
+
+  }];
+
+  // CommonJS module is defined
+  if (typeof module !== "undefined" && module.exports) {
+      module.exports = templatesCacheLoader;
+  }
+  /*global ender:false */
+  if (typeof ender === 'undefined') {
+      this['templates'] = templatesCacheLoader;
+  }
+  /*global define:false */
+  if (typeof define === "function" && define.amd) {
+      define("templates", [], function () {
+          return templatesCacheLoader;
+      });
+  }
 })();
 ```
 
@@ -58,23 +76,14 @@ This will generate the following at `dist/templates.js`:
 
 This can either be done via HTML:
 
-```html
-<script src="dist/templates.js"></script>
+```javascript
+var app = angular.module('MyApp', []);
+var templateCacheLoader = require('template');
+
+if(templateCacheLoader != null)
+  app.run templateCacheLoader;
 ```
 
-or via your Gruntfile:
-
-```js
-concat: {
-  build: {
-    src: [
-      'src/js/**/*.js',       
-      '<%= ngtemplates.myapp.dest %>' // Generated templates
-    ],
-    dest: 'dist/js/app.js'
-  }
-}
-```
 
 
 ## Changelog
