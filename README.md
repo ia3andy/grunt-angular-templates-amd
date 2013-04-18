@@ -72,9 +72,8 @@ This will generate the following at `dist/templates.js`:
 })();
 ```
 
-### Include Compiled Templates
+### Include Compiled Templates in angular app
 
-This can either be done via HTML:
 
 ```javascript
 var app = angular.module('MyApp', []);
