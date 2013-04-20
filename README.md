@@ -80,7 +80,7 @@ var app = angular.module('MyApp', []);
 var templateCacheLoader = require('template');
 
 if(templateCacheLoader != null)
-  app.run templateCacheLoader;
+  app.run(templateCacheLoader);
 ```
 
 
